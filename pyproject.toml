@@ -1,0 +1,28 @@
+[project]
+name = "one-time-pad"
+version = "0.1.0"
+description = "A GUI application for easy use of one-time pad encryption written in Python."
+readme = "README.md"
+authors = [
+    { name = "martin-coding", email = "martin.coding.public@gmail.com" }
+]
+requires-python = ">=3.12.8"
+dependencies = [
+    "platformdirs>=4.3.6",
+]
+
+[project.scripts]
+one-time-pad = "one_time_pad:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[dependency-groups]
+dev = [
+    "ruff>=0.8.2",
+]
+
+[tool.ruff]
+select = ["ALL"]
+line-length = 128
