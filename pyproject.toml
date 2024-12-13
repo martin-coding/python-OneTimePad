@@ -1,6 +1,6 @@
 [project]
 name = "one-time-pad"
-version = "0.1.0"
+version = "0.2.0"
 description = "A GUI application for easy use of one-time pad encryption written in Python."
 readme = "README.md"
 authors = [
@@ -9,6 +9,7 @@ authors = [
 requires-python = ">=3.12.8"
 dependencies = [
     "platformdirs>=4.3.6",
+    "pyside6>=6.8.1",
 ]
 
 [project.scripts]
@@ -20,9 +21,16 @@ build-backend = "hatchling.build"
 
 [dependency-groups]
 dev = [
+    "pyinstaller>=6.11.1",
     "ruff>=0.8.2",
 ]
 
 [tool.ruff]
+line-length = 150
+
+[tool.ruff.lint]
 select = ["ALL"]
-line-length = 128
+ignore = ["D203", "D213"]
+
+[tool.ruff.lint.per-file-ignores]
+"*_model.py" = ["ARG002", "N802"]

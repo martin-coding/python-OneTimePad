@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>644</width>
+    <height>488</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="encryptTab">
+       <attribute name="title">
+        <string>Encrypt</string>
+       </attribute>
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <item>
+         <layout class="QVBoxLayout" name="encryptFileLayout">
+          <item>
+           <widget class="QLabel" name="encryptKeyfilesLabel">
+            <property name="text">
+             <string>Available keyfiles:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QTreeView" name="encryptKeyfilesView"/>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="encryptLayout">
+          <item>
+           <widget class="QLabel" name="inputMessageLabel">
+            <property name="text">
+             <string>Input message:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPlainTextEdit" name="inputMessageField"/>
+          </item>
+          <item>
+           <widget class="QPushButton" name="encryptButton">
+            <property name="text">
+             <string>Encrypt</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPlainTextEdit" name="outputCiphertextField"/>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="decryptTab">
+       <attribute name="title">
+        <string>Decrypt</string>
+       </attribute>
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <item>
+         <layout class="QVBoxLayout" name="decryptFileLayout">
+          <item>
+           <widget class="QLabel" name="decryptKeyfilesLabel">
+            <property name="text">
+             <string>Available keyfiles:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QTreeView" name="decryptKeyfilesView"/>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="decryptLayout">
+          <item>
+           <widget class="QLabel" name="inputCiphertextLabel">
+            <property name="text">
+             <string>Input ciphertext:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPlainTextEdit" name="inputCiphertextField"/>
+          </item>
+          <item>
+           <widget class="QPushButton" name="decryptButton">
+            <property name="text">
+             <string>Decrypt</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPlainTextEdit" name="outputMessageField"/>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>644</width>
+     <height>33</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
