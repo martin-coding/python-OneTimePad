@@ -49,7 +49,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         if message == "":
             Dialog("info", "Message empty", "Message input field empty. Nothing to encrypt.")
             return
-        ciphertext = otp.encode_data(self.encrypt_keyfile, message)
+        try:
+            ciphertext = otp.encode_data(self.encrypt_keyfile, message)
+        except OverflowError:
+            Dialog("error", "Overflow Error", "The remaining keyfile data is out of range.")
+            return
         if ciphertext is None:
             Dialog("error", "Key too short", "The selected key has not enough free bytes remaining. Try selecting a diffrent one")
             return
