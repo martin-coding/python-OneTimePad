@@ -25,18 +25,18 @@ class Ui_Dialog(object):
         Dialog.resize(516, 113)
         self.verticalLayout = QVBoxLayout(Dialog)
         self.verticalLayout.setObjectName(u"verticalLayout")
-        self.messageTitel = QLabel(Dialog)
-        self.messageTitel.setObjectName(u"messageTitel")
+        self.messageTitle = QLabel(Dialog)
+        self.messageTitle.setObjectName(u"messageTitle")
         sizePolicy = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.messageTitel.sizePolicy().hasHeightForWidth())
-        self.messageTitel.setSizePolicy(sizePolicy)
+        sizePolicy.setHeightForWidth(self.messageTitle.sizePolicy().hasHeightForWidth())
+        self.messageTitle.setSizePolicy(sizePolicy)
         font = QFont()
         font.setPointSize(24)
-        self.messageTitel.setFont(font)
+        self.messageTitle.setFont(font)
 
-        self.verticalLayout.addWidget(self.messageTitel)
+        self.verticalLayout.addWidget(self.messageTitle)
 
         self.messageDescription = QLabel(Dialog)
         self.messageDescription.setObjectName(u"messageDescription")
@@ -65,7 +65,7 @@ class Ui_Dialog(object):
 
     def retranslateUi(self, Dialog):
         Dialog.setWindowTitle(QCoreApplication.translate("Dialog", u"Dialog", None))
-        self.messageTitel.setText(QCoreApplication.translate("Dialog", u"Titel", None))
+        self.messageTitle.setText(QCoreApplication.translate("Dialog", u"Title", None))
         self.messageDescription.setText(QCoreApplication.translate("Dialog", u"description...", None))
     # retranslateUi
 

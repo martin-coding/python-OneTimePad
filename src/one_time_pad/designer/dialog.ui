@@ -15,7 +15,7 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="QLabel" name="messageTitel">
+    <widget class="QLabel" name="messageTitle">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
        <horstretch>0</horstretch>
@@ -28,7 +28,7 @@
       </font>
      </property>
      <property name="text">
-      <string>Titel</string>
+      <string>Title</string>
      </property>
     </widget>
    </item>
