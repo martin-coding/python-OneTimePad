@@ -1,4 +1,5 @@
 """Python module for basic otp related functions."""
+
 import base64
 from pathlib import Path
 
@@ -18,11 +19,13 @@ def read_pos_metadata(file_path: Path) -> int:
     path.write_bytes(bytes_val)
     return new_value
 
+
 def write_pos_metadata(file_path: Path, position: int) -> None:
     """Write the current position to metadata file."""
     path = file_path.parent / (file_path.stem + ".meta")
     bytes_val = position.to_bytes(4, cfg.BYTEORDER)
     path.write_bytes(bytes_val)
+
 
 def read_key(key_path: Path, file_pos: int, key_length: int) -> bytes:
     """Return key bytes from keyfile and update position."""
@@ -37,8 +40,10 @@ def read_key(key_path: Path, file_pos: int, key_length: int) -> bytes:
         write_pos_metadata(key_path, file_pos)
     return data
 
+
 def _xor_bytes(data: bytes, key: bytes) -> bytes:
     return bytes(a ^ b for a, b in zip(data, key, strict=True))
+
 
 def encode_data(key_path: Path, message: str) -> str:
     """Return encoded ciphertext package."""
@@ -54,6 +59,7 @@ def encode_data(key_path: Path, message: str) -> str:
     pos_data = file_pos.to_bytes(4, cfg.BYTEORDER)
     package = pos_data + encrypted
     return base64.a85encode(package).decode(cfg.ENCODING)
+
 
 def decode_data(key_path: Path, ciphertext: str) -> str:
     """Return decoded cleartext message."""

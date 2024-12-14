@@ -1,4 +1,5 @@
 """Dialog window for displaying data to user."""
+
 from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import QDialog
 
@@ -28,13 +29,16 @@ class Dialog(QDialog, Ui_Dialog):
             },
         }
 
-        settings = dialog_settings.get(dialog_type, {
-            "icon": QIcon.fromTheme(QIcon.ThemeIcon.DialogInformation),
-            "title": "Default",
-        })
+        settings = dialog_settings.get(
+            dialog_type,
+            {
+                "icon": QIcon.fromTheme(QIcon.ThemeIcon.DialogInformation),
+                "title": "Default",
+            },
+        )
 
         self.setWindowIcon(settings["icon"])
         self.setWindowTitle(settings["title"])
-        self.messageTitel.setText(title)
+        self.messageTitle.setText(title)
         self.messageDescription.setText(description)
         self.exec()

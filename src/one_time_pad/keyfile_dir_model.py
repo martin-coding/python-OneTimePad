@@ -1,4 +1,5 @@
 """Custom implementation of the QFileSystemModel."""
+
 from pathlib import Path
 
 from PySide6.QtCore import QDir, QModelIndex, QObject, Qt
@@ -41,7 +42,7 @@ class KeyfileDirModel(QFileSystemModel):
             return ""
         return super().data(index, role)
 
-    def human_readable_size(self, size: float, decimal_places: int =2 ) -> str:
+    def human_readable_size(self, size: float, decimal_places: int = 2) -> str:
         """Return the file size with appropriate units."""
         for unit in ["B", "KiB", "MiB", "GiB", "TiB"]:
             if size < 2**10:

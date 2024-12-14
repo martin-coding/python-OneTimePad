@@ -1,4 +1,5 @@
 """Main window of application."""
+
 from pathlib import Path
 
 from platformdirs import user_data_dir
@@ -31,10 +32,14 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         # Set up views
         self.en_dir_model = self._setup_view(
-            send_key_dir, self.encryptKeyfilesView, self.encrypt_view_changed,
+            send_key_dir,
+            self.encryptKeyfilesView,
+            self.encrypt_view_changed,
         )
         self.de_dir_model = self._setup_view(
-            receive_key_dir, self.decryptKeyfilesView, self.decrypt_view_changed,
+            receive_key_dir,
+            self.decryptKeyfilesView,
+            self.decrypt_view_changed,
         )
 
         self.encryptButton.clicked.connect(self.encrypt)
@@ -55,7 +60,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             Dialog("error", "Overflow Error", "The remaining keyfile data is out of range.")
             return
         if ciphertext is None:
-            Dialog("error", "Key too short", "The selected key has not enough free bytes remaining. Try selecting a diffrent one")
+            Dialog("error", "Key too short", "The selected key has not enough free bytes remaining. Try selecting a different one")
             return
         self.outputCiphertextField.setPlainText(ciphertext)
         self.en_dir_model.layoutChanged.emit()
@@ -78,7 +83,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             Dialog("error", e.args[0], "Your selected key is probably not the one used for encryption.")
             return
         if message is None:
-            Dialog("error", "Key too short", "The selected key has not enough free bytes remaining. Try selecting a diffrent one")
+            Dialog("error", "Key too short", "The selected key has not enough free bytes remaining. Try selecting a different one")
             return
         self.outputMessageField.setPlainText(message)
         self.de_dir_model.layoutChanged.emit()
@@ -96,7 +101,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         """Call when encrypt view selection changes."""
         self.view_changed(selected, self.en_dir_model, "encrypt_keyfile")
 
-    def decrypt_view_changed(self, selected: QItemSelection, deselected: QItemSelection) -> None: # noqa: ARG002 ignore deselected
+    def decrypt_view_changed(self, selected: QItemSelection, deselected: QItemSelection) -> None:  # noqa: ARG002 ignore deselected
         """Call when decrypt view selection changes."""
         self.view_changed(selected, self.de_dir_model, "decrypt_keyfile")
 
