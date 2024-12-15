@@ -2,8 +2,43 @@
 
 import base64
 from pathlib import Path
+from secrets import SystemRandom
+
+from PySide6.QtCore import SignalInstance
 
 import one_time_pad.config as cfg
+
+
+def write_random_keyfile(file_path: Path, total_bytes: int, progress_callback: SignalInstance, buffer_size: int = 104_857_600) -> None:
+    """Write a specific amount of random bytes to a file in a buffered manner.
+
+    Args:
+        file_path (str): Path to the file where the random bytes will be written.
+        total_bytes (int): Total number of random bytes to write.
+        progress_callback (SignalInstance): s
+        buffer_size (int): Number of bytes to write at a time (default is 100 MiB).
+
+    Raises:
+        ValueError: If total_bytes or buffer_size is not a positive integer.
+
+    """
+    if total_bytes <= 0:
+        msg = "total_bytes must be a positive integer."
+        raise ValueError(msg)
+    if buffer_size <= 0:
+        msg = "buffer_size must be a positive integer."
+        raise ValueError(msg)
+
+    random_generator = SystemRandom()
+
+    with file_path.open("wb") as file:
+        total_bytes_written = 0
+        while total_bytes_written < total_bytes:
+            chunk_size = min(buffer_size, total_bytes - total_bytes_written)
+            chunk = random_generator.randbytes(chunk_size)
+            written_bytes = file.write(chunk)
+            total_bytes_written += written_bytes
+            progress_callback.emit(total_bytes_written * 100 // total_bytes)
 
 
 def read_pos_metadata(file_path: Path) -> int:

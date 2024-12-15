@@ -1,13 +1,16 @@
 """Main window of application."""
 
+import shutil
 from pathlib import Path
+from threading import Thread
 
 from platformdirs import user_data_dir
 from PySide6.QtCore import QItemSelection
-from PySide6.QtWidgets import QHeaderView, QMainWindow, QTreeView
+from PySide6.QtWidgets import QFileDialog, QHeaderView, QMainWindow, QTreeView
 
 from one_time_pad import otp
 from one_time_pad.dialog import Dialog
+from one_time_pad.generate_dialog import GenerateDialog
 from one_time_pad.generated.ui_main_window import Ui_MainWindow
 from one_time_pad.keyfile_dir_model import KeyfileDirModel
 
@@ -24,29 +27,57 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.decrypt_keyfile: Path = None
 
         keystore_directory = Path(user_data_dir("one-time-pad", "martin-coding")) / "keystore"
-        send_key_dir = keystore_directory / "send"
-        receive_key_dir = keystore_directory / "receive"
+        self.send_key_dir = keystore_directory / "send"
+        self.receive_key_dir = keystore_directory / "receive"
 
-        send_key_dir.mkdir(parents=True, exist_ok=True)
-        receive_key_dir.mkdir(parents=True, exist_ok=True)
+        self.send_key_dir.mkdir(parents=True, exist_ok=True)
+        self.receive_key_dir.mkdir(parents=True, exist_ok=True)
 
-        # Set up views
         self.en_dir_model = self._setup_view(
-            send_key_dir,
+            self.send_key_dir,
             self.encryptKeyfilesView,
             self.encrypt_view_changed,
         )
         self.de_dir_model = self._setup_view(
-            receive_key_dir,
+            self.receive_key_dir,
             self.decryptKeyfilesView,
             self.decrypt_view_changed,
         )
 
-        self.encryptButton.clicked.connect(self.encrypt)
-        self.decryptButton.clicked.connect(self.decrypt)
+        self.encryptButton.clicked.connect(self._encrypt)
+        self.decryptButton.clicked.connect(self._decrypt)
+        self.enGenerateButton.clicked.connect(self._generate_keyfile)
+        self.enExportButton.clicked.connect(self._export_keyfile)
+        self.enImportButton.clicked.connect(lambda: self._import_keyfile(self.send_key_dir))
+        self.enDeleteButton.clicked.connect(lambda: self._delete_keyfile(self.encrypt_keyfile))
+        self.deDeleteButton.clicked.connect(lambda: self._delete_keyfile(self.decrypt_keyfile))
+        self.deAddButton.clicked.connect(lambda: self._import_keyfile(self.receive_key_dir))
 
-    def encrypt(self) -> None:
-        """Encrypt."""
+    def _export_keyfile(self) -> None:
+        if not self.encrypt_keyfile:
+            Dialog("info", "No keyfile", "No keyfile selected. Try selecting a key to your left.")
+            return
+        export_file, _ = QFileDialog.getSaveFileName(self, "Export to:", "", "Keyfile (*.key)")
+        if export_file:
+            copy = Thread(target=shutil.copy, name="Export key", args=(self.encrypt_keyfile, export_file))
+            copy.start()
+
+    def _import_keyfile(self, location: Path) -> None:
+        import_file, _ = QFileDialog.getOpenFileName(self, "Import file:", "", "Keyfile (*.key)")
+        if import_file:
+            copy = Thread(target=shutil.copy, name="Import key", args=(import_file, location))
+            copy.start()
+
+    def _delete_keyfile(self, keyfile: Path) -> None:
+        if keyfile and keyfile.exists():
+            metafile = keyfile.parent / (keyfile.stem + ".meta")
+            keyfile.unlink()
+            metafile.unlink()
+
+    def _generate_keyfile(self) -> None:
+        GenerateDialog(self)
+
+    def _encrypt(self) -> None:
         message = self.inputMessageField.toPlainText()
         if self.encrypt_keyfile is None:
             Dialog("info", "No keyfile", "No keyfile selected. Try selecting a key to your left.")
@@ -65,8 +96,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.outputCiphertextField.setPlainText(ciphertext)
         self.en_dir_model.layoutChanged.emit()
 
-    def decrypt(self) -> None:
-        """Decrypt."""
+    def _decrypt(self) -> None:
         ciphertext = self.inputCiphertextField.toPlainText()
         if self.decrypt_keyfile is None:
             Dialog("info", "No keyfile", "No keyfile selected. Try selecting a key to your left.")

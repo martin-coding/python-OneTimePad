@@ -6,12 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>644</width>
-    <height>488</height>
+    <width>640</width>
+    <height>480</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>OTP - Manager</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -28,11 +28,83 @@
         <item>
          <layout class="QVBoxLayout" name="encryptFileLayout">
           <item>
-           <widget class="QLabel" name="encryptKeyfilesLabel">
-            <property name="text">
-             <string>Available keyfiles:</string>
-            </property>
-           </widget>
+           <layout class="QHBoxLayout" name="encryptButtonLayout">
+            <item>
+             <widget class="QLabel" name="encryptKeyfilesLabel">
+              <property name="text">
+               <string>Available keyfiles:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="encryptButtonSpacer">
+              <property name="orientation">
+               <enum>Qt::Orientation::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <widget class="QToolButton" name="enDeleteButton">
+              <property name="toolTip">
+               <string>Delete Keyfile</string>
+              </property>
+              <property name="text">
+               <string>-</string>
+              </property>
+              <property name="icon">
+               <iconset theme="QIcon::ThemeIcon::EditDelete"/>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QToolButton" name="enGenerateButton">
+              <property name="toolTip">
+               <string>Generate Keyfile</string>
+              </property>
+              <property name="text">
+               <string>+</string>
+              </property>
+              <property name="icon">
+               <iconset theme="QIcon::ThemeIcon::DocumentNew"/>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QToolButton" name="enExportButton">
+              <property name="toolTip">
+               <string>Export keyfile</string>
+              </property>
+              <property name="text">
+               <string>-</string>
+              </property>
+              <property name="icon">
+               <iconset theme="QIcon::ThemeIcon::GoUp"/>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QToolButton" name="enImportButton">
+              <property name="toolTip">
+               <string>Import keyfile</string>
+              </property>
+              <property name="text">
+               <string>+</string>
+              </property>
+              <property name="icon">
+               <iconset theme="QIcon::ThemeIcon::GoDown"/>
+              </property>
+              <property name="toolButtonStyle">
+               <enum>Qt::ToolButtonStyle::ToolButtonIconOnly</enum>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </item>
           <item>
            <widget class="QTreeView" name="encryptKeyfilesView"/>
@@ -73,11 +145,57 @@
         <item>
          <layout class="QVBoxLayout" name="decryptFileLayout">
           <item>
-           <widget class="QLabel" name="decryptKeyfilesLabel">
-            <property name="text">
-             <string>Available keyfiles:</string>
-            </property>
-           </widget>
+           <layout class="QHBoxLayout" name="decryptButtonLayout">
+            <item>
+             <widget class="QLabel" name="decryptKeyfilesLabel">
+              <property name="text">
+               <string>Available keyfiles:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="decryptButtonSpacer">
+              <property name="orientation">
+               <enum>Qt::Orientation::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <widget class="QToolButton" name="deDeleteButton">
+              <property name="toolTip">
+               <string>Remove Keyfile</string>
+              </property>
+              <property name="text">
+               <string>-</string>
+              </property>
+              <property name="icon">
+               <iconset theme="QIcon::ThemeIcon::ListRemove"/>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QToolButton" name="deAddButton">
+              <property name="toolTip">
+               <string>Add Keyfile</string>
+              </property>
+              <property name="text">
+               <string>+</string>
+              </property>
+              <property name="icon">
+               <iconset theme="QIcon::ThemeIcon::ListAdd"/>
+              </property>
+              <property name="arrowType">
+               <enum>Qt::ArrowType::NoArrow</enum>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </item>
           <item>
            <widget class="QTreeView" name="decryptKeyfilesView"/>
@@ -119,7 +237,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>644</width>
+     <width>640</width>
      <height>33</height>
     </rect>
    </property>
