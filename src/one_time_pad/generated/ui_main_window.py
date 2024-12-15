@@ -17,14 +17,14 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QHBoxLayout, QHeaderView, QLabel,
     QMainWindow, QMenuBar, QPlainTextEdit, QPushButton,
-    QSizePolicy, QStatusBar, QTabWidget, QTreeView,
-    QVBoxLayout, QWidget)
+    QSizePolicy, QSpacerItem, QStatusBar, QTabWidget,
+    QToolButton, QTreeView, QVBoxLayout, QWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(644, 488)
+        MainWindow.resize(640, 480)
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         self.verticalLayout = QVBoxLayout(self.centralwidget)
@@ -37,10 +37,48 @@ class Ui_MainWindow(object):
         self.horizontalLayout.setObjectName(u"horizontalLayout")
         self.encryptFileLayout = QVBoxLayout()
         self.encryptFileLayout.setObjectName(u"encryptFileLayout")
+        self.encryptButtonLayout = QHBoxLayout()
+        self.encryptButtonLayout.setObjectName(u"encryptButtonLayout")
         self.encryptKeyfilesLabel = QLabel(self.encryptTab)
         self.encryptKeyfilesLabel.setObjectName(u"encryptKeyfilesLabel")
 
-        self.encryptFileLayout.addWidget(self.encryptKeyfilesLabel)
+        self.encryptButtonLayout.addWidget(self.encryptKeyfilesLabel)
+
+        self.encryptButtonSpacer = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.encryptButtonLayout.addItem(self.encryptButtonSpacer)
+
+        self.enDeleteButton = QToolButton(self.encryptTab)
+        self.enDeleteButton.setObjectName(u"enDeleteButton")
+        icon = QIcon(QIcon.fromTheme(QIcon.ThemeIcon.EditDelete))
+        self.enDeleteButton.setIcon(icon)
+
+        self.encryptButtonLayout.addWidget(self.enDeleteButton)
+
+        self.enGenerateButton = QToolButton(self.encryptTab)
+        self.enGenerateButton.setObjectName(u"enGenerateButton")
+        icon1 = QIcon(QIcon.fromTheme(QIcon.ThemeIcon.DocumentNew))
+        self.enGenerateButton.setIcon(icon1)
+
+        self.encryptButtonLayout.addWidget(self.enGenerateButton)
+
+        self.enExportButton = QToolButton(self.encryptTab)
+        self.enExportButton.setObjectName(u"enExportButton")
+        icon2 = QIcon(QIcon.fromTheme(QIcon.ThemeIcon.GoUp))
+        self.enExportButton.setIcon(icon2)
+
+        self.encryptButtonLayout.addWidget(self.enExportButton)
+
+        self.enImportButton = QToolButton(self.encryptTab)
+        self.enImportButton.setObjectName(u"enImportButton")
+        icon3 = QIcon(QIcon.fromTheme(QIcon.ThemeIcon.GoDown))
+        self.enImportButton.setIcon(icon3)
+        self.enImportButton.setToolButtonStyle(Qt.ToolButtonStyle.ToolButtonIconOnly)
+
+        self.encryptButtonLayout.addWidget(self.enImportButton)
+
+
+        self.encryptFileLayout.addLayout(self.encryptButtonLayout)
 
         self.encryptKeyfilesView = QTreeView(self.encryptTab)
         self.encryptKeyfilesView.setObjectName(u"encryptKeyfilesView")
@@ -82,10 +120,34 @@ class Ui_MainWindow(object):
         self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
         self.decryptFileLayout = QVBoxLayout()
         self.decryptFileLayout.setObjectName(u"decryptFileLayout")
+        self.decryptButtonLayout = QHBoxLayout()
+        self.decryptButtonLayout.setObjectName(u"decryptButtonLayout")
         self.decryptKeyfilesLabel = QLabel(self.decryptTab)
         self.decryptKeyfilesLabel.setObjectName(u"decryptKeyfilesLabel")
 
-        self.decryptFileLayout.addWidget(self.decryptKeyfilesLabel)
+        self.decryptButtonLayout.addWidget(self.decryptKeyfilesLabel)
+
+        self.decryptButtonSpacer = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.decryptButtonLayout.addItem(self.decryptButtonSpacer)
+
+        self.deDeleteButton = QToolButton(self.decryptTab)
+        self.deDeleteButton.setObjectName(u"deDeleteButton")
+        icon4 = QIcon(QIcon.fromTheme(QIcon.ThemeIcon.ListRemove))
+        self.deDeleteButton.setIcon(icon4)
+
+        self.decryptButtonLayout.addWidget(self.deDeleteButton)
+
+        self.deAddButton = QToolButton(self.decryptTab)
+        self.deAddButton.setObjectName(u"deAddButton")
+        icon5 = QIcon(QIcon.fromTheme(QIcon.ThemeIcon.ListAdd))
+        self.deAddButton.setIcon(icon5)
+        self.deAddButton.setArrowType(Qt.ArrowType.NoArrow)
+
+        self.decryptButtonLayout.addWidget(self.deAddButton)
+
+
+        self.decryptFileLayout.addLayout(self.decryptButtonLayout)
 
         self.decryptKeyfilesView = QTreeView(self.decryptTab)
         self.decryptKeyfilesView.setObjectName(u"decryptKeyfilesView")
@@ -127,7 +189,7 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(MainWindow)
         self.menubar.setObjectName(u"menubar")
-        self.menubar.setGeometry(QRect(0, 0, 644, 33))
+        self.menubar.setGeometry(QRect(0, 0, 640, 33))
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QStatusBar(MainWindow)
         self.statusbar.setObjectName(u"statusbar")
@@ -142,12 +204,36 @@ class Ui_MainWindow(object):
     # setupUi
 
     def retranslateUi(self, MainWindow):
-        MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
+        MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"OTP - Manager", None))
         self.encryptKeyfilesLabel.setText(QCoreApplication.translate("MainWindow", u"Available keyfiles:", None))
+#if QT_CONFIG(tooltip)
+        self.enDeleteButton.setToolTip(QCoreApplication.translate("MainWindow", u"Delete Keyfile", None))
+#endif // QT_CONFIG(tooltip)
+        self.enDeleteButton.setText(QCoreApplication.translate("MainWindow", u"-", None))
+#if QT_CONFIG(tooltip)
+        self.enGenerateButton.setToolTip(QCoreApplication.translate("MainWindow", u"Generate Keyfile", None))
+#endif // QT_CONFIG(tooltip)
+        self.enGenerateButton.setText(QCoreApplication.translate("MainWindow", u"+", None))
+#if QT_CONFIG(tooltip)
+        self.enExportButton.setToolTip(QCoreApplication.translate("MainWindow", u"Export keyfile", None))
+#endif // QT_CONFIG(tooltip)
+        self.enExportButton.setText(QCoreApplication.translate("MainWindow", u"-", None))
+#if QT_CONFIG(tooltip)
+        self.enImportButton.setToolTip(QCoreApplication.translate("MainWindow", u"Import keyfile", None))
+#endif // QT_CONFIG(tooltip)
+        self.enImportButton.setText(QCoreApplication.translate("MainWindow", u"+", None))
         self.inputMessageLabel.setText(QCoreApplication.translate("MainWindow", u"Input message:", None))
         self.encryptButton.setText(QCoreApplication.translate("MainWindow", u"Encrypt", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.encryptTab), QCoreApplication.translate("MainWindow", u"Encrypt", None))
         self.decryptKeyfilesLabel.setText(QCoreApplication.translate("MainWindow", u"Available keyfiles:", None))
+#if QT_CONFIG(tooltip)
+        self.deDeleteButton.setToolTip(QCoreApplication.translate("MainWindow", u"Remove Keyfile", None))
+#endif // QT_CONFIG(tooltip)
+        self.deDeleteButton.setText(QCoreApplication.translate("MainWindow", u"-", None))
+#if QT_CONFIG(tooltip)
+        self.deAddButton.setToolTip(QCoreApplication.translate("MainWindow", u"Add Keyfile", None))
+#endif // QT_CONFIG(tooltip)
+        self.deAddButton.setText(QCoreApplication.translate("MainWindow", u"+", None))
         self.inputCiphertextLabel.setText(QCoreApplication.translate("MainWindow", u"Input ciphertext:", None))
         self.decryptButton.setText(QCoreApplication.translate("MainWindow", u"Decrypt", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.decryptTab), QCoreApplication.translate("MainWindow", u"Decrypt", None))
