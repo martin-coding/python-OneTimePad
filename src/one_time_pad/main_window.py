@@ -127,12 +127,16 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         selection_model.selectionChanged.connect(callback)
         return dir_model
 
-    def encrypt_view_changed(self, selected: QItemSelection, deselected: QItemSelection) -> None:  # noqa: ARG002 ignore deselected
+    def encrypt_view_changed(self, selected: QItemSelection, deselected: QItemSelection) -> None:
         """Call when encrypt view selection changes."""
+        if deselected.indexes():
+            self.encrypt_keyfile = None
         self.view_changed(selected, self.en_dir_model, "encrypt_keyfile")
 
-    def decrypt_view_changed(self, selected: QItemSelection, deselected: QItemSelection) -> None:  # noqa: ARG002 ignore deselected
+    def decrypt_view_changed(self, selected: QItemSelection, deselected: QItemSelection) -> None:
         """Call when decrypt view selection changes."""
+        if deselected.indexes():
+            self.decrypt_keyfile = None
         self.view_changed(selected, self.de_dir_model, "decrypt_keyfile")
 
     def view_changed(self, selected: QItemSelection, dir_model: KeyfileDirModel, attribute_name: str) -> None:
