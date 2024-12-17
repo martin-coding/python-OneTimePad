@@ -11,9 +11,18 @@ repos:
     rev: v5.0.0
     hooks:
     -   id: trailing-whitespace
+    -   id: mixed-line-ending
+    -   id: fix-byte-order-marker
     -   id: end-of-file-fixer
-    -   id: check-yaml
+    -   id: detect-private-key
+    -   id: destroyed-symlinks
+    -   id: debug-statements
     -   id: check-added-large-files
+    -   id: check-case-conflict
+    -   id: check-merge-conflict
+    -   id: check-ast
+    -   id: check-toml
+    -   id: check-yaml
 -   repo: https://github.com/crate-ci/typos
     rev: v1.28.3
     hooks:
