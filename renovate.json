@@ -3,12 +3,7 @@
   "extends": ["config:recommended"],
   "packageRules": [
     {
-      "matchDepTypes": ["dependencies", "devDependencies"],
-      "commitType": "build"
-    },
-    {
       "matchManagers": ["github-actions"],
-      "commitType": "ci",
       "pinDigests": true
     }
   ]
