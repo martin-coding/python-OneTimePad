@@ -1,6 +1,6 @@
 [project]
 name = "one-time-pad"
-version = "0.3.0"
+version = "0.3.1"
 description = "A GUI application for easy use of one-time pad encryption written in Python."
 readme = "README.md"
 authors = [

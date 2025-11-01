@@ -39,7 +39,8 @@ class GenerateDialog(QDialog, Ui_GenerateDialog):
 
     def _thread_complete(self) -> None:
         self.generateButton.setEnabled(True)
-        self.main_window.en_dir_model.layoutChanged.emit()
+        self.doneGeneratingButton.setEnabled(True)
+        self.main_window.en_dir_model.refresh()
 
     def _start_generating(self) -> None:
         file_name = self.keyNameEdit.text() if self.keyNameEdit.text() else self.keyNameEdit.placeholderText()
@@ -62,4 +63,5 @@ class GenerateDialog(QDialog, Ui_GenerateDialog):
         worker.signals.error.connect(self._error_received)
 
         self.generateButton.setEnabled(False)
+        self.doneGeneratingButton.setEnabled(False)
         self.threadpool.start(worker)
