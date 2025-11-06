@@ -20,6 +20,12 @@ class KeyfileDirModel(QFileSystemModel):
         self.setRootPath(directory)
         self.headers = ["Name", "Size", "Remaining"]
 
+    def refresh(self) -> None:
+        """Force re-check of file stats from disk."""
+        root = self.rootPath()
+        self.setRootPath("")
+        self.setRootPath(root)
+
     def headerData(self, section: int, orientation: Qt.Orientation, role: int = Qt.DisplayRole) -> str:
         """Return the data for the given role and section in the header with the specified orientation."""
         if role == Qt.DisplayRole and orientation == Qt.Horizontal:

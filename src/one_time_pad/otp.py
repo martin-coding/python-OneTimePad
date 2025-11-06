@@ -1,6 +1,7 @@
 """Python module for basic otp related functions."""
 
 import base64
+import os
 from pathlib import Path
 from secrets import SystemRandom
 
@@ -39,6 +40,8 @@ def write_random_keyfile(file_path: Path, total_bytes: int, progress_callback: S
             written_bytes = file.write(chunk)
             total_bytes_written += written_bytes
             progress_callback.emit(total_bytes_written * 100 // total_bytes)
+        file.flush()
+        os.fsync(file.fileno())  # ensures data and metadata written
 
 
 def read_pos_metadata(file_path: Path) -> int:
